@@ -25,18 +25,15 @@ void showGraph(vector<int> G[],int v){
 void BFS(vector<int> G[],int s,int v){
 	int color[v],d[v],pi[v];
 	for(int i=0;i<v;i++){
-		if(i!=s){
-		color[i]=WHITE;		d[i] = INF;		pi[i] = NIL;}
+		color[i]=WHITE;		d[i] = INF;		pi[i] = NIL;
 	}
 	color[s]=GRAY;
 	d[s]=0;
 	pi[s] = NIL;
 	queue <int> q;
 	q.push(s);
-	int last = 0;
-	int u;
 	while(!q.empty()){
-		u = q.front();
+		int u = q.front();
 		cout<<u<<" ";
 		q.pop();
 		for(auto v:G[u]){
@@ -46,8 +43,8 @@ void BFS(vector<int> G[],int s,int v){
 				pi[v]=u;
 				q.push(v); 
 			}
-			color[u] = BLACK;
 		}
+		color[u] = BLACK;
 	}
 	cout<<endl;
 	return ;
