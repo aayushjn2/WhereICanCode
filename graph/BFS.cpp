@@ -3,64 +3,114 @@
     this is the graph traversal approach, that is, BFS
 
 */
+/*
+	this is BFS of a given connected undirected graph.Connected Graph is a graph in which u can
+	reach to any vertex from any other vertex,that is,you can start with any node and you will
+	be able to reach any node in a graph
+*/
+
 #include<bits/stdc++.h>
 using namespace std;
-#define WHITE 0 
-#define GRAY 1 
+#define WHITE 0
+#define GRAY 1
 #define BLACK 2
 #define INF 0xffffff
 #define NIL -1
-void addEdge(vector<int> G[], int u,int v){
+
+//check for type of the graph
+int checkTypeOfGraph(){
+    int typeOfGraph;
+    cout<<"Enter 1 for undirected graph and 0 for directed graph";
+    cin>>typeOfGraph;
+    while(1){
+        if(typeOfGraph==1)break;
+        else if(typeOfGraph==0)break;
+        else{
+            cout<<"Enter the valid Choice "<<endl;
+            cin>>typeOfGraph;
+        }
+    }
+    return typeOfGraph;
+}
+
+//add edge for undirected graph
+void addEdgeUndirectedGraph(vector<int> G[], int u,int v){
+	
 	G[u].push_back(v);
 	G[v].push_back(u);
 }
+
+//add edge for directed graph
+void addEdgeDirectedGraph(vector<int> G[], int u,int v){
+	
+	G[u].push_back(v);
+}
+
+//this method will print the adjacency list
 void showGraph(vector<int> G[],int v){
 	for(int i=0;i<v;i++){
-		cout<<i<<" -> ";
-		for(auto x:G[i])
-			cout<<x<<"/";
+		cout<<i<<"->";
+		vector<int>::iterator j;
+		for(j = G[i].begin();j != G[i].end();j++){
+			cout<<*j<<"/";
+		}
 		cout<<endl;
 	}
 }
-void BFS(vector<int> G[],int s,int v){
-	int color[v],d[v],pi[v];
-	for(int i=0;i<v;i++){
-		color[i]=WHITE;		d[i] = INF;		pi[i] = NIL;
-	}
-	color[s]=GRAY;
-	d[s]=0;
-	pi[s] = NIL;
-	queue <int> q;
-	q.push(s);
-	while(!q.empty()){
+
+// Method BFS 
+void BFS(vector<int> G[],int s,int ver, int color[]){
+	
+	color[s]=GRAY; // it signifies that node has discovered now 
+	queue <int> q; //intialising queue
+	q.push(s); //current node pushed
+	while( !q.empty() ){
 		int u = q.front();
 		cout<<u<<" ";
 		q.pop();
-		for(auto v:G[u]){
-			if(color[v]==WHITE){
-				color[v] = GRAY;
-				d[v] = d[u]+1;
-				pi[v]=u;
-				q.push(v); 
+		vector<int>::iterator v;
+		for(v = G[u].begin();v!=G[u].end();v++){
+			if(color[*v]==WHITE){
+				color[*v] = GRAY;
+				q.push(*v); //finally pushed into the queue
 			}
+			color[u] = BLACK;//finally processed
 		}
-		color[u] = BLACK;
 	}
 	cout<<endl;
 	return ;
 }
+
+
 int main(){
+	int typeOfGraph = checkTypeOfGraph();
+	// typeOfGraph have 1 for undirected graph and 0 for directed graph
 	cout<<"Enter total number of nodes for the graph"<<endl;
 	int ver;cin>>ver;
 	vector<int> G[ver];
 	cout<<"Enter total number of edges for the graph"<<endl;
 	int e;cin>>e;
+	
+	cout<<"Enter each edge "<<endl;
+	// add each edge to the graph
 	for(int i=0;i<e;i++){
 		int u,v;cin>>u>>v;
-		addEdge(G,u,v);
+		if(typeOfGraph)
+			addEdgeUndirectedGraph(G,u,v);
+		else
+			addEdgeDirectedGraph(G,u,v);
 	}
-	//showGraph(G,ver);
-	BFS(G,0,ver);
-	BFS(G,3,ver);
+	
+	showGraph(G,ver);
+	int color[ver];
+	
+	for(int i=0;i<ver;i++){
+		color[i] = WHITE;	
+	}
+	
+	for(int i=0;i<ver;i++){
+		if(color[i]==WHITE)
+			BFS(G,i,ver,color);
+	}
 	return 0;
 }
