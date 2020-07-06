@@ -1,0 +1,1 @@
+Note that the implementation of union() and find() is naive and takes O(n) time in worst case.
