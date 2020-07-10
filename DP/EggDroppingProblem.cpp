@@ -20,17 +20,12 @@ int eggTrials(int eggs, int floors){
             }
         }
     }
-    for(int floor=0;floor<=floors;floor++){
-        for(int egg=0;egg<=eggs;egg++){
-            cout<<mem[floor][egg]<<" ";
-        }
-        cout<<endl;
-    }
     return mem[floors][eggs];
 }
 
-int main(){
+int main(){ 
     int eggs,floors;
+    cout<<"Enter total eggs and then floors";
     cin>>eggs>>floors;
     int trials;
     trials = eggTrials(eggs,floors);
