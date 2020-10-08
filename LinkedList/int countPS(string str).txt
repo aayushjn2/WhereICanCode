@@ -1,0 +1,25 @@
+int countPS(string str){
+    int n = str.size();
+    int res = n;
+    bool mem[n][n];
+    memset(mem,false,sizeof(mem));
+    for(int i=0;i<n;i++)
+        mem[i][i] = true;
+    for(int i=0;i<n;i++){
+        if(str[i]==str[i+1]){
+            mem[i][i+1] = true;
+            res +=1;
+        }
+    }
+    
+    for(int length = 3;length<=n;length++){
+        for(int i=0;i<n+1-length;i++){
+            int j = i-1+length;
+            if(str[i]==str[j] && mem[i+1][j-1){
+                mem[i][j] = true;
+                res+=1;
+            }
+        }
+    }
+    return res;
+}

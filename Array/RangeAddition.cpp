@@ -1,11 +1,11 @@
 #include<bits/stdc++.h>
 using namepsace std;
-//Knowledge required
+
 int sum(int prefix[], int start, int end){
     if(start==0){
         return prefix[end];
     }
-    return prefix[end]-prefix[start-1];
+    return prefix[end] - prefix[start-1];
 }
 
 int main(){
@@ -19,12 +19,15 @@ int main(){
             prefix[i] = a[i];
     }
     int x  = sum(prefix,i,j);
+
     cout<<"Sum of array from ith index to jth index"<<x<<endl;
+    
     int range[n];
     memset(range,0,sizeof(range));
     int q;cin>>q;
     for(int i=0;i<q;i++){
-        int start,end,value;cin>>start>>end>>value;
+        int start,end,value;
+        cin>>start>>end>>value;
         range[start] = value;
         range[end+1] = -1*value;
     }

@@ -1,0 +1,18 @@
+int countPS(string str){
+    int n = str.size();
+    int res = n;
+    long long mem[n][n];
+    for(int i=0;i<n;i++)
+        mem[i][i] = 1;
+    
+    for(int length = 1;length<=n;length++){
+        for(int i=0;i<n+1-length;i++){
+            int j = i-1+length;
+            if(str[i]==str[j])
+                mem[i][j] = mem[i][j-1] + mem[i+1][j] + 1;
+            else
+                mem[i][j] = mem[i+1][j] + mem[1][j-1] - mem[i+1][j-1];
+        }
+    }
+    return mem[0][n-1];
+}

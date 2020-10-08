@@ -5,7 +5,8 @@ vector<int> kahnsAlgo(vector<pair<int,int>> g[],int vertices){
     queue<int> q;
     vector<int> indegree(vertices,0);
     for(int i=0;i<vertices;i++){
-        if(indegree[i]==0)q.push(i);
+        if(indegree[i]==0)
+            q.push(i);
     }
     int count = n;
     while(!q.empty()){

@@ -5,18 +5,20 @@ string longestPalindrome(string str) {
     if(n==0 || n==1)
         return str;
     bool mem[n][n]; 
-    
+    long long res = 0;
     memset(mem, 0, sizeof(mem)); 
     int maxLength = 1; 
-
-    for (int i = 0; i < n; i++) 
+    for (int i = 0; i < n; i++){
         mem[i][i] = true; 
+        res++;
+    }
     int start = 0; 
     for (int i = 0; i < n - 1; i++) { 
         if (str[i] == str[i + 1]) { 
             mem[i][i + 1] = true; 
             start = i; 
             maxLength = 2; 
+            res++;
         } 
     } 
     for (int length = 3; length <= n; length++) {  
@@ -24,7 +26,7 @@ string longestPalindrome(string str) {
             int j = i + length - 1; 
             if (mem[i + 1][j - 1] && str[i] == str[j]) { 
                 mem[i][j] = true; 
-
+                res++;
                 if (length > maxLength) { 
                     start = i; 
                     maxLength = length; 
