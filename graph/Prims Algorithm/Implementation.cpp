@@ -21,7 +21,7 @@ void primsMst(vector<vector<pair<int,int>>> &g, int vertices){
             int v = x.first;
             int w = x.second;
             if(inMST[v] == false && key[v] > w){
-                key[v] = weight;
+                key[v] = w;
                 pq.push({key[v],v});
                 parent[v] = u;
             }
