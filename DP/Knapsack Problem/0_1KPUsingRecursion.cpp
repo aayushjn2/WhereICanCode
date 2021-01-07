@@ -17,6 +17,7 @@ int usingRecursionAllSubset(int W, int value[], int weight[], int n){
             usingRecursionAllSubset(W, value, weight, n-1)
         );
 }
+
 int main(){
     int testCases;cin>>testCases;
     while(testCases--){
