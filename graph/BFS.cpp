@@ -74,8 +74,8 @@ void BFS(vector<int> G[],int s,int ver, int color[]){
 				color[*v] = GRAY;
 				q.push(*v); //finally pushed into the queue
 			}
-			color[u] = BLACK;//finally processed
 		}
+		color[u] = BLACK;//finally processed
 	}
 	cout<<endl;
 	return ;
