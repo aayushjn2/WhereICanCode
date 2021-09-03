@@ -32,7 +32,7 @@ bool findPartition(int a[], int n){
     if(sum %2 !=0){
         return false;
     }
-    return subsetSumProblem(0,n,sum/2,a);
+    return subsetSumProblem(a,n,sum/2);
 }
 
 
