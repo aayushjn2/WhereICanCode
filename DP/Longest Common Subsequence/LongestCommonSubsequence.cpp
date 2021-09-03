@@ -8,7 +8,6 @@ inline int max(int a,int b){
 int longestCommonSubsequence_(string a, string b) {
     int x = a.length(), y = b.length();
     int l[x+1][y+1];
-    bool row;
     for(int i=0;i<=x;i++){
         for(int j=0;j<=y;j++){
             if(i==0 || j==0)
