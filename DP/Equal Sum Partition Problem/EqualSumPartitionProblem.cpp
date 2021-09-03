@@ -1,22 +1,6 @@
 #include<bits/stdc++.h>
+
 using namespace std;
-
-
-//recursive approach
-bool subsetProblem(int index, int n, int sum, int a[]){
-    if(index == n-1 && sum >0){
-        return false;
-    }
-    if(sum == 0){
-        return true;
-    }
-    if(sum < a[index]){
-        return subsetProblem(index+1,n,sum,a);
-    }
-    return subsetProblem(index+1,n,sum,a) || subsetProblem(index+1,n,sum-a[index],a);
-}
-
-//iterative
 
 bool subsetSumProblem(int a[], int n, int sum){
     bool subset[n+1][sum+1];
@@ -37,8 +21,21 @@ bool subsetSumProblem(int a[], int n, int sum){
             }
         }
     }
-    return subset[n][sum];
+    return subset[n][sum];  
 }
+
+bool findPartition(int a[], int n){
+    int sum = 0;
+    for(int i=0;i<n;i++){
+        sum += a[i];
+    }
+    if(sum %2 !=0){
+        return false;
+    }
+    return subsetSumProblem(0,n,sum/2,a);
+}
+
+
 int main(){
 
 }
